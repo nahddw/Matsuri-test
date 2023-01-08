@@ -42,8 +42,18 @@ jobs:
       - name: Native Build
         if: steps.cache.outputs.cache-hit != 'true'
         run: ./run init action go && ./run lib core
-      - name: Upload Apk
-        uses: actions/upload-artifact@v1
-        with: 
+      - name: copy artifacts
+        run: |
+          cp app/libs/libcore.aar libcore.aar
+          cp app/libs/libcore.aar libcore.aar
+      - name: upload assets
+        uses: actions/upload-artifact@v2
+        with:
+          name: libcore.aar
+          path: libcore.aar
+
+      - name: upload assets
+        uses: actions/upload-artifact@v2
+        with:
           name: libcore.aar
           path: libcore.aar
